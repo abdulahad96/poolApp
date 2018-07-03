@@ -1,0 +1,28 @@
+body{
+    background-color: rgba(181, 255, 111, 0.535);
+}
+.color{
+    background-color: black;
+    
+}
+.col {
+    color: azure;
+}
+.ima{
+    width: 400px;
+    margin: 0 20% 0 20%;
+}
+@media (max-width: 450px){
+    .ima{
+        width: 100px;
+    }
+}
+#botarea{
+    display: none;
+}
+#outbtn{
+    display: none;
+}
+#polgot{
+    display: none;
+}

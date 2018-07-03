@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Poll App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body onload="check();">
+
+    <nav class="navbar navbar-inverse color">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle col" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="./index.html"><span class="glyphicon glyphicon-tasks"></span> Poll App</a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <!-- <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 3</a>
+                    </li>
+                </ul> -->
+                <ul class="nav navbar-nav navbar-right">
+                        <li id="signbtn">
+                            <a href="#" data-toggle="modal" data-target="#registermodal">
+                                <span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                        </li>
+                        <li id="logbtn">
+                            <a href="#" data-toggle="modal" data-target="#signinmodal">
+                                <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                        </li>
+                        <li id="outbtn">
+                                <a href="#" data-toggle="modal" data-target="#" onclick="signout()">
+                                        <span class="glyphicon glyphicon-user"></span>logout</a>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="registermodal" tabindex="-1" role="dialog" aria-labelledby="registermodalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registermodalLabel">Sign Up</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="name" class="">Username:</label>
+                        <input type="text" required="required" class="form-control" maxlength="20" placeholder="e.g.   Ali" id="name">
+                        <!-- <label for="number" class="">Number: </label>
+                        <input type="tel" placeholder="e.g.  03XXxxxxxxx" id="number" maxlength="11" class="form-control"> -->
+                        <label for="password" class="">Password:</label>
+                        <input type="password" required="required" placeholder="**********" id="pwd" class="form-control">
+                        <label for="email" class="">Email:</label>
+                        <input type="email" required="required" placeholder="e.g.   abc@example.com" class="form-control" id="email">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" onclick="signUp()">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!-- signin -->
+         <div class="modal fade" id="signinmodal" tabindex="-1" role="dialog" aria-labelledby="signinmodalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="signinmodalLabel">Sign In</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="email">Email:</label>
+                            <input type="email" required="required" placeholder="e.g.  abc@example.com" class="form-control" id="userEmail">
+                            <label for="password">Password:</label>
+                            <input type="password" required="required" placeholder="**********" id="userPwd" class="form-control">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success" onclick="logIn()">Sign In</button>
+                            <h6 id="error"></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+    <div class="container">
+                <img class="img-rounded ima" src="./images/polls-md.png" alt="polling Image"><br><br>
+                <h1 id="head1">Register Your Self First</h1>
+        
+            
+        <div id="botarea">
+
+                <button type="button" class="btn btn-primary btn-block" id="listcreat" onclick="topool();">Create Poll</button>
+                <button type="button" class="btn btn-default btn-block" id="listview" onclick="tolist();">Poll List</button>
+        </div>
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCqJrj0n-YoZwxk7u3Rz5583CrA1dyOoO8",
+        authDomain: "proworker-2ef3c.firebaseapp.com",
+        databaseURL: "https://proworker-2ef3c.firebaseio.com",
+        projectId: "proworker-2ef3c",
+        storageBucket: "proworker-2ef3c.appspot.com",
+        messagingSenderId: "781286748939"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>
